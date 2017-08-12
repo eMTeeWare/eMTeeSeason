@@ -2,4 +2,5 @@
     <string name="app_name">eMTee Season</string>
     <string name="add_new_item">Neue Serie hinzufügen</string>
     <string name="newSeriesDialogTitle">Name der neuen Serie:</string>
+    <string name="vorschau">preview</string>
 </resources>

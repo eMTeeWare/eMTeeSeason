@@ -30,7 +30,7 @@ import static net.emteeware.emteeseason.R.id.SeriesList;
 public class MainActivity extends AppCompatActivity {
 
     ArrayList<Series> items = new ArrayList<>();
-    ArrayAdapter<Series> adapter;
+    CustomListViewAdapter adapter;
     String filename = "seriesListStore";
 
 
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
         ListView listview = (ListView) findViewById(R.id.SeriesList);
 
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, items);
+        adapter = new CustomListViewAdapter(this, R.layout.list_item, items);
 
 
         listview.setAdapter(adapter);

@@ -11,14 +11,15 @@ import java.util.Random;
 class Series implements Serializable {
     private String name;
     private int currentSeason;
+    private int imageId;
 
-    public String getName() {
+    String getName() {
         return name;
     }
 
     @Override
     public String toString() {
-        return name + " Staffel " + currentSeason;
+        return name + " " + getSeasonString();
     }
 
     void setName(String name) {
@@ -29,5 +30,14 @@ class Series implements Serializable {
 
         this.name = name;
         currentSeason = (new Random()).nextInt(6)+1;
+        imageId = 1;
+    }
+
+    String getSeasonString() {
+        return "Staffel " + currentSeason;
+    }
+
+    public int getImageId() {
+        return imageId;
     }
 }
