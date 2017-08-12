@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     public void addItems(View view) {
         final String[] addedSeriesName = {""};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Name der neuen Serie:");
+        builder.setTitle(R.string.newSeriesDialogTitle);
 
 
         final EditText input = new EditText(this);
