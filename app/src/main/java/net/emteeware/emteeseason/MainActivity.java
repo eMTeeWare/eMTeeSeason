@@ -29,8 +29,8 @@ import static net.emteeware.emteeseason.R.id.SeriesList;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<String> items = new ArrayList<>();
-    ArrayAdapter<String> adapter;
+    ArrayList<Series> items = new ArrayList<>();
+    ArrayAdapter<Series> adapter;
     String filename = "seriesListStore";
 
 
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File(getFilesDir(), filename)))) {
             Object inputObject = ois.readObject();
             if(inputObject instanceof ArrayList) {
-                items = (ArrayList<String>) inputObject;
+                items = (ArrayList<Series>) inputObject;
             }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 addedSeriesName[0] = input.getText().toString();
-                items.add(addedSeriesName[0]);
+                items.add(new Series(addedSeriesName[0]));
                 try {
                     ObjectOutput out = new ObjectOutputStream(new FileOutputStream(new File(getFilesDir(), filename)));
                     out.writeObject(items);
