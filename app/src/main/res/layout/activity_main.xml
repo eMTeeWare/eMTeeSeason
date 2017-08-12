@@ -6,10 +6,22 @@
     android:layout_height="match_parent"
     tools:context="net.emteeware.emteeseason.MainActivity">
 
-    <ListView
-        android:id="@+id/SeriesList"
-        android:layout_width="368dp"
-        android:layout_height="495dp"
-        tools:layout_editor_absoluteX="1147dp"
-        tools:layout_editor_absoluteY="246dp" />
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+        <Button
+            android:id="@+id/addBtn"
+            android:text="Add New Item"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:onClick="addItems"/>
+        <ListView
+            android:id="@+id/SeriesList"
+            android:layout_width="368dp"
+            android:layout_height="495dp"
+            tools:layout_editor_absoluteX="1147dp"
+            tools:layout_editor_absoluteY="246dp" />
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>
