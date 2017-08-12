@@ -1,5 +1,6 @@
 package net.emteeware.emteeseason;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,15 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import static net.emteeware.emteeseason.R.id.SeriesList;
@@ -21,15 +31,26 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<String> items = new ArrayList<>();
     ArrayAdapter<String> adapter;
+    String filename = "seriesListStore";
 
 
     @Override
+    @SuppressWarnings("unchecked")
     public void onCreate(Bundle savedInstanceState)
     {
 
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File(getFilesDir(), filename)))) {
+            Object inputObject = ois.readObject();
+            if(inputObject instanceof ArrayList) {
+                items = (ArrayList<String>) inputObject;
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
         ListView listview = (ListView) findViewById(R.id.SeriesList);
 
@@ -55,6 +76,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 addedSeriesName[0] = input.getText().toString();
                 items.add(addedSeriesName[0]);
+                try {
+                    ObjectOutput out = new ObjectOutputStream(new FileOutputStream(new File(getFilesDir(), filename)));
+                    out.writeObject(items);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
                 adapter.notifyDataSetChanged();
             }
         });
