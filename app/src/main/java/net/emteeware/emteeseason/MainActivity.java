@@ -8,9 +8,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import static net.emteeware.emteeseason.R.id.SeriesList;
 
 public class MainActivity extends AppCompatActivity {
+
+    ArrayList<String> items = new ArrayList<>();
+    ArrayAdapter<String> adapter;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -18,12 +24,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        items.add( "Suits");
         ListView listview = (ListView) findViewById(R.id.SeriesList);
 
-        String[] items = new String[] {"Blue Bloods", "Marvel's Daredevil", "Suits"};
-        ArrayAdapter<String> adapter =
-                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, items);
+
 
         listview.setAdapter(adapter);
+    }
+
+    public void addItems(View view) {
+        items.add("Blue Bloods");
+        items.add("Sherlock");
+        adapter.notifyDataSetChanged();
     }
 }
