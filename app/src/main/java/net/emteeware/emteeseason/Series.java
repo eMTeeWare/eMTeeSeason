@@ -1,6 +1,7 @@
 package net.emteeware.emteeseason;
 
 import java.io.Serializable;
+import java.util.Random;
 
 /**
  * Created by Merlin Thomas on 12.08.2017.
@@ -9,6 +10,7 @@ import java.io.Serializable;
 
 class Series implements Serializable {
     private String name;
+    private int currentSeason;
 
     public String getName() {
         return name;
@@ -16,7 +18,7 @@ class Series implements Serializable {
 
     @Override
     public String toString() {
-        return name;
+        return name + " Staffel " + currentSeason;
     }
 
     void setName(String name) {
@@ -26,5 +28,6 @@ class Series implements Serializable {
     Series(String name) {
 
         this.name = name;
+        currentSeason = (new Random()).nextInt(6)+1;
     }
 }
